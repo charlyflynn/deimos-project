@@ -1,0 +1,74 @@
+[
+  {
+    "country": "GB",
+    "percentile": "p0p10",
+    "year": 2019,
+    "disposable_income": 9384.8
+  },
+  {
+    "country": "GB",
+    "percentile": "p10p20",
+    "year": 2019,
+    "disposable_income": 16780.4
+  },
+  {
+    "country": "GB",
+    "percentile": "p20p30",
+    "year": 2019,
+    "disposable_income": 20532.1
+  },
+  {
+    "country": "GB",
+    "percentile": "p30p40",
+    "year": 2019,
+    "disposable_income": 23524.4
+  },
+  {
+    "country": "GB",
+    "percentile": "p40p50",
+    "year": 2019,
+    "disposable_income": 26355.2
+  },
+  {
+    "country": "GB",
+    "percentile": "p50p60",
+    "year": 2019,
+    "disposable_income": 29499.2
+  },
+  {
+    "country": "GB",
+    "percentile": "p60p70",
+    "year": 2019,
+    "disposable_income": 32995.4
+  },
+  {
+    "country": "GB",
+    "percentile": "p70p80",
+    "year": 2019,
+    "disposable_income": 37876.8
+  },
+  {
+    "country": "GB",
+    "percentile": "p80p90",
+    "year": 2019,
+    "disposable_income": 46420.6
+  },
+  {
+    "country": "GB",
+    "percentile": "p90p100",
+    "year": 2019,
+    "disposable_income": 89996.8
+  },
+  {
+    "country": "GB",
+    "percentile": "p99.9p100",
+    "year": 2019,
+    "disposable_income": 927589.4
+  },
+  {
+    "country": "GB",
+    "percentile": "p99p100",
+    "year": 2019,
+    "disposable_income": 266385.9
+  }
+ ]
