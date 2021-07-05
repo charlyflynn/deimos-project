@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Canvas } from '@react-three/fiber'
+import postTaxIncome from './postTaxIncome.json';
 
 function App() {
+const rows = postTaxIncome.map((item) => <tr key={item.percentile}><td>{item.country}</td>
+<td>{item.percentile}</td>
+<td>{item.year}</td>
+<td>{item.disposable_income}</td>
+</tr>);
+
+const headings = Object.keys(postTaxIncome[0]).map((item) => <th key={item} >{item}</th>)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div id="canvas-container">
+<table> 
+<thead><tr>
+{headings}</tr></thead>
+  <tbody>
+  {rows}
+
+  </tbody>
+</table>
+      <Canvas />
+      </div>
     </div>
   );
 }
