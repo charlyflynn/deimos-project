@@ -1,29 +1,43 @@
-import { Canvas } from '@react-three/fiber'
-import postTaxIncome from './postTaxIncome.json';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import styled from 'styled-components';
+import Header from './Header';
+import Landing from './Landing';
+import RawDataTable from './RawDataTable';
+import Visualisation from './Visualisation';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
+
+const ViewPort = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 function App() {
-const rows = postTaxIncome.map((item) => <tr key={item.percentile}><td>{item.country}</td>
-<td>{item.percentile}</td>
-<td>{item.year}</td>
-<td>{item.disposable_income}</td>
-</tr>);
-
-const headings = Object.keys(postTaxIncome[0]).map((item) => <th key={item} >{item}</th>)
-
   return (
-    <div className="App">
-      <div id="canvas-container">
-<table> 
-<thead><tr>
-{headings}</tr></thead>
-  <tbody>
-  {rows}
-
-  </tbody>
-</table>
-      <Canvas />
-      </div>
-    </div>
+    <Router>
+      <Container>
+        <Header />
+        <ViewPort>
+          <Switch>
+            <Route path="/visualisation">
+              <Visualisation />
+            </Route>
+            <Route path="/data">
+              <RawDataTable />
+            </Route>
+            <Route path="/">
+              <Landing />
+            </Route>
+          </Switch>
+        </ViewPort>
+      </Container>
+    </Router>
   );
 }
 
