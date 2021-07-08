@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './Header';
-import Landing from './Landing';
+import Info from './Info';
 import RawDataTable from './RawDataTable';
 import Visualisation from './Visualisation';
 
@@ -25,14 +25,14 @@ function App() {
         <Header />
         <ViewPort>
           <Switch>
-            <Route path="/visualisation">
-              <Visualisation />
+            <Route path="/info">
+              <Info />
             </Route>
             <Route path="/data">
               <RawDataTable />
             </Route>
             <Route path="/">
-              <Landing />
+              <Visualisation />
             </Route>
           </Switch>
         </ViewPort>

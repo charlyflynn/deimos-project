@@ -11,7 +11,7 @@ const Header = () => {
     <StyledHeader>
       <Link to="">Home</Link>
       <Link to="data">Data</Link>
-      <Link to="visualisation">Visualisation</Link>
+      <Link to="info">Info</Link>
     </StyledHeader>
   );
 };

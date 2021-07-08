@@ -6,7 +6,7 @@ function App() {
       <td>{item.country}</td>
       <td>{item.percentile}</td>
       <td>{item.year}</td>
-      <td>{item.disposable_income}</td>
+      <td>{item.disposableIncome}</td>
     </tr>
   ));
 
