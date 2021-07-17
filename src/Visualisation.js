@@ -3,8 +3,10 @@ import { useRef } from 'react';
 import CameraControls from './CameraControls';
 import OrbitControls from './OrbitControls';
 import postTaxIncome from './postTaxIncome';
+import Skybox from './Skybox';
 
 const divisor = postTaxIncome[0].disposableIncome;
+const cameraDefaultPosition = [24, 25, 45];
 
 const Box = () => {
   const mesh = useRef();
@@ -23,6 +25,23 @@ const Box = () => {
       <meshPhongMaterial attach="material" color="blue" />
     </mesh>
   );
+};
+
+const SetCamera = (action) => {
+  let position;
+  switch (action) {
+    case 'reset':
+      position = { x: 0, y: 0, z: 45 };
+      break;
+
+    default:
+  }
+
+  useThree(({ camera }) => {
+    const [x, y, z] = cameraDefaultPosition;
+    camera.position.set(x, y, z);
+  });
+  return null;
 };
 
 const Sphere = ({ args, position, i }) => {
@@ -58,13 +77,15 @@ const Visualisation = () => {
     <>
       <Canvas
         camera={{
-          position: [24, 25, 45],
+          position: cameraDefaultPosition,
           rotation: [0, 0, 0],
           near: 1,
           far: 1000,
         }}
       >
         <OrbitControls />
+        <SetCamera />
+        <Skybox />
         <pointLight position={[0, 0, 100]} intensity="0.9" />
         <ambientLight intensity="0.02" />
         <Spheres />
