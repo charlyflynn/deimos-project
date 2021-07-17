@@ -1,15 +1,9 @@
-import { Canvas, extend, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
-import styled from 'styled-components';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import CameraControls from './CameraControls';
+import OrbitControls from './OrbitControls';
 import postTaxIncome from './postTaxIncome';
 
-extend({ OrbitControls });
-
-const Container = styled.div`
-  width: min(100vh, 100vw);
-  height: min(100vh, 100vw);
-`;
 const divisor = postTaxIncome[0].disposableIncome;
 
 const Box = () => {
@@ -36,7 +30,7 @@ const Sphere = ({ args, position, i }) => {
   const { clock } = useThree();
 
   useFrame(() => {
-    mesh.current.position.y = Math.sin(i + clock.getElapsedTime());
+    mesh.current.position.y = 8 * Math.sin(i + clock.getElapsedTime());
   });
 
   return (
@@ -47,51 +41,38 @@ const Sphere = ({ args, position, i }) => {
   );
 };
 
-const CameraControls = () => {
-  const controls = useRef();
-  const {
-    camera,
-    gl: { domElement },
-  } = useThree();
-  useFrame(() => controls.current.update());
-  return <orbitControls ref={controls} args={[camera, domElement]} />;
-};
-
 const Spheres = () => {
   return postTaxIncome
     .map(({ disposableIncome }, i) => (
       <Sphere
         args={[disposableIncome / divisor, 35, 35]}
-        position={[i * 5.5, 0, 0]}
+        position={[-40 + i * 9, 0, 0]}
         i={i}
       />
     ))
-    .slice(0, 5);
+    .slice(0, 8);
 };
 
 const Visualisation = () => {
   return (
-    <Container>
+    <>
       <Canvas
         camera={{
-          position: [0, 0, 45],
+          position: [24, 25, 45],
           rotation: [0, 0, 0],
-          near: 0.1,
-          far: 100,
+          near: 1,
+          far: 1000,
         }}
       >
-        <clock />
-        <axesHelper args={[20]} />
-        <color attach="background" args={[0x888888]} intensity={0.01} />
-        <group position={[0, 2, 0]}>
-          <Spheres />
-        </group>
-        <Box />
-        <CameraControls />
+        <OrbitControls />
         <pointLight position={[0, 0, 100]} intensity="0.9" />
-        <ambientLight color="goldenrod" intensity="0.5" />
+        <ambientLight intensity="0.02" />
+        <Spheres />
+        {false && <Box />}
+        {/* <axesHelper args={[20]} /> */}
       </Canvas>
-    </Container>
+      <CameraControls />
+    </>
   );
 };
 
