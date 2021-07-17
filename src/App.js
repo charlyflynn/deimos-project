@@ -9,13 +9,15 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background-color: #030303;
 `;
 
 const ViewPort = styled.div`
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
+  width: 100%;
 `;
 
 function App() {
