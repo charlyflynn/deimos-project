@@ -1,10 +1,10 @@
-const CameraControls = ({ cameraDefaultPosition, camera }) => {
+const CameraControls = ({ cameraDefaultPosition, setCameraPosition }) => {
   const [x, y, z] = cameraDefaultPosition;
   const controlDefs = [
     {
       text: 'reset camera',
       action: () => {
-        camera.position.set(x, y, z);
+        setCameraPosition([x, y, z]);
       },
     },
   ];
