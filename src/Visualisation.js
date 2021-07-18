@@ -27,18 +27,11 @@ const Box = () => {
   );
 };
 
-const SetCamera = (action) => {
-  let position;
-  switch (action) {
-    case 'reset':
-      position = { x: 0, y: 0, z: 45 };
-      break;
-
-    default:
-  }
-
+const SetCamera = ({ cameraRef }) => {
   useThree(({ camera }) => {
-    const [x, y, z] = cameraDefaultPosition;
+    // const [x, y, z] = cameraDefaultPosition;
+
+    const [x, y, z] = [-50, -50, -50];
     camera.position.set(x, y, z);
   });
   return null;
@@ -62,8 +55,9 @@ const Sphere = ({ args, position, i }) => {
 
 const Spheres = () => {
   return postTaxIncome
-    .map(({ disposableIncome }, i) => (
+    .map(({ percentile, disposableIncome }, i) => (
       <Sphere
+        key={percentile}
         args={[disposableIncome / divisor, 35, 35]}
         position={[-40 + i * 9, 0, 0]}
         i={i}
@@ -73,6 +67,8 @@ const Spheres = () => {
 };
 
 const Visualisation = () => {
+  const camera = useRef();
+  // const { size } = useThree();
   return (
     <>
       <Canvas
@@ -84,15 +80,26 @@ const Visualisation = () => {
         }}
       >
         <OrbitControls />
-        <SetCamera />
+        <SetCamera cameraRef={camera} />
+        <perspectiveCamera
+          ref={camera}
+          // aspect={size.width / size.height}
+          // radius={(size.width + size.height) / 4}
+          // onUpdate={(self) => self.updateProjectionMatrix()}
+        />
         <Skybox />
         <pointLight position={[0, 0, 100]} intensity="0.9" />
         <ambientLight intensity="0.02" />
         <Spheres />
         {false && <Box />}
-        {/* <axesHelper args={[20]} /> */}
+        <axesHelper args={[20]} />
       </Canvas>
-      <CameraControls />
+      {false && (
+        <CameraControls
+          camera={camera}
+          cameraDefaultPosition={cameraDefaultPosition}
+        />
+      )}
     </>
   );
 };
