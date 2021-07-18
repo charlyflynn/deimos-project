@@ -1,5 +1,5 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import CameraControls from './CameraControls';
 import OrbitControls from './OrbitControls';
 import postTaxIncome from './postTaxIncome';
@@ -27,11 +27,9 @@ const Box = () => {
   );
 };
 
-const SetCamera = ({ cameraRef }) => {
+const SetCamera = ({ position }) => {
   useThree(({ camera }) => {
-    // const [x, y, z] = cameraDefaultPosition;
-
-    const [x, y, z] = [-50, -50, -50];
+    const [x, y, z] = position;
     camera.position.set(x, y, z);
   });
   return null;
@@ -68,11 +66,12 @@ const Spheres = () => {
 
 const Visualisation = () => {
   const camera = useRef();
-  // const { size } = useThree();
+  const [cameraPosition, setCameraPosition] = useState(cameraDefaultPosition);
   return (
     <>
       <Canvas
         camera={{
+          ref: camera,
           position: cameraDefaultPosition,
           rotation: [0, 0, 0],
           near: 1,
@@ -80,13 +79,7 @@ const Visualisation = () => {
         }}
       >
         <OrbitControls />
-        <SetCamera cameraRef={camera} />
-        <perspectiveCamera
-          ref={camera}
-          // aspect={size.width / size.height}
-          // radius={(size.width + size.height) / 4}
-          // onUpdate={(self) => self.updateProjectionMatrix()}
-        />
+        <SetCamera position={cameraPosition} />
         <Skybox />
         <pointLight position={[0, 0, 100]} intensity="0.9" />
         <ambientLight intensity="0.02" />
@@ -94,12 +87,10 @@ const Visualisation = () => {
         {false && <Box />}
         <axesHelper args={[20]} />
       </Canvas>
-      {false && (
-        <CameraControls
-          camera={camera}
-          cameraDefaultPosition={cameraDefaultPosition}
-        />
-      )}
+      <CameraControls
+        cameraDefaultPosition={cameraDefaultPosition}
+        setCameraPosition={setCameraPosition}
+      />
     </>
   );
 };
