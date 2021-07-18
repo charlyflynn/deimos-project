@@ -1,5 +1,6 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useRef, useState } from 'react';
+import { TextureLoader } from 'three';
 import CameraControls from './CameraControls';
 import OrbitControls from './OrbitControls';
 import postTaxIncome from './postTaxIncome';
@@ -40,13 +41,17 @@ const Sphere = ({ args, position, i }) => {
   const { clock } = useThree();
 
   useFrame(() => {
-    mesh.current.position.y = 8 * Math.sin(i + clock.getElapsedTime());
+    mesh.current.position.y = 8 * Math.sin(i + clock.getElapsedTime() / 2);
   });
 
   return (
     <mesh ref={mesh} position={position}>
       <sphereGeometry attach="geometry" args={args} />
-      <meshPhongMaterial attach="material" color="goldenrod" />
+      {/* <meshPhongMaterial attach="material" color="goldenrod" /> */}
+      <meshLambertMaterial
+        attach="material"
+        map={new TextureLoader().load('/images/mars.jpeg')}
+      />
     </mesh>
   );
 };
@@ -88,8 +93,9 @@ const Visualisation = () => {
         <axesHelper args={[20]} />
       </Canvas>
       <CameraControls
-        cameraDefaultPosition={cameraDefaultPosition}
+        cameraDefaultPosition={[cameraDefaultPosition]}
         setCameraPosition={setCameraPosition}
+        // camera={camera}
       />
     </>
   );
