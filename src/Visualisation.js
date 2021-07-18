@@ -41,13 +41,15 @@ const Sphere = ({ args, position, i }) => {
   const { clock } = useThree();
 
   useFrame(() => {
-    mesh.current.position.y = 8 * Math.sin(i + clock.getElapsedTime() / 2);
+    mesh.current.position.y =
+      8 * Math.sin(((i * 0.1 + 1) * clock.getElapsedTime()) / 2);
+
+    mesh.current.rotation.y = clock.getElapsedTime() / 3;
   });
 
   return (
     <mesh ref={mesh} position={position}>
       <sphereGeometry attach="geometry" args={args} />
-      {/* <meshPhongMaterial attach="material" color="goldenrod" /> */}
       <meshLambertMaterial
         attach="material"
         map={new TextureLoader().load('/images/mars.jpeg')}
@@ -62,7 +64,7 @@ const Spheres = () => {
       <Sphere
         key={percentile}
         args={[disposableIncome / divisor, 35, 35]}
-        position={[-40 + i * 9, 0, 0]}
+        position={[i * 9 - 40, 0, i * 3 * Math.cos(i)]}
         i={i}
       />
     ))
