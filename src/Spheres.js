@@ -16,7 +16,6 @@ const Sphere = ({ args, orbitRadius }) => {
     mesh.current.position.z = orbitRadius * Math.sin(omega * t - phi);
   });
 
-  console.log('sphere', args);
   return (
     <mesh ref={mesh}>
       <sphereGeometry attach="geometry" args={args} />
