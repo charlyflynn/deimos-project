@@ -1,24 +1,15 @@
-const CameraControls = ({ cameraDefaultPosition, setCameraPosition }) => {
+const CameraControls = ({ cameraDefaultPosition }) => {
   const [x, y, z] = cameraDefaultPosition;
   const controlDefs = [
     {
       text: 'reset',
-      action: () => {
-        setCameraPosition(cameraDefaultPosition);
-      },
+      action: () => {},
     },
-    // {
-    //   text: 'invert',
-    //   action: () => {
-    //     const { x, y, z } = camera.position;
-    //     setCameraPosition([x, y, z]);
-    //   },
-    // },
   ];
   const controls = controlDefs.map(({ text, action }) => (
-    <div as="button" className="controlItem" onClick={action} key={text}>
+    <button disabled className="controlItem" onClick={action} key={text}>
       {text}
-    </div>
+    </button>
   ));
 
   return (
