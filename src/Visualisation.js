@@ -1,32 +1,16 @@
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 import { useRef, useState } from 'react';
-import { TextureLoader } from 'three';
+import BoxTest from './BoxTest';
 import CameraControls from './CameraControls';
 import OrbitControls from './OrbitControls';
 import postTaxIncome from './postTaxIncome';
 import Skybox from './Skybox';
+import Spheres from './Spheres';
 
-const divisor = postTaxIncome[0].disposableIncome;
-const cameraDefaultPosition = [24, 25, 45];
-
-const Box = () => {
-  const mesh = useRef();
-
-  useFrame(
-    () =>
-      (mesh.current.rotation.x =
-        mesh.current.rotation.y =
-        mesh.current.rotation.z +=
-          0.01)
-  );
-
-  return (
-    <mesh ref={mesh} position={[0, 0, 0]}>
-      <boxGeometry args={[1, 1, 1]} attach="geometry" />
-      <meshPhongMaterial attach="material" color="blue" />
-    </mesh>
-  );
-};
+const near = 1 * 10 ** 4;
+const far = 1 * 10 ** 12;
+const show = { Spheres: true, BoxTest: false, Sphere: false };
+const cameraDefaultPosition = [near * 2, near * 2, near * 3];
 
 const SetCamera = ({ position }) => {
   useThree(({ camera }) => {
@@ -36,40 +20,10 @@ const SetCamera = ({ position }) => {
   return null;
 };
 
-const Sphere = ({ args, position, i }) => {
-  const mesh = useRef();
-  const { clock } = useThree();
-
-  useFrame(() => {
-    mesh.current.position.y =
-      8 * Math.sin(((i * 0.1 + 1) * clock.getElapsedTime()) / 2);
-
-    mesh.current.rotation.y = clock.getElapsedTime() / 3;
-  });
-
-  return (
-    <mesh ref={mesh} position={position}>
-      <sphereGeometry attach="geometry" args={args} />
-      <meshLambertMaterial
-        attach="material"
-        map={new TextureLoader().load('/images/mars.jpeg')}
-      />
-    </mesh>
-  );
-};
-
-const Spheres = () => {
-  return postTaxIncome
-    .map(({ percentile, disposableIncome }, i) => (
-      <Sphere
-        key={percentile}
-        args={[disposableIncome / divisor, 35, 35]}
-        position={[i * 9 - 40, 0, i * 3 * Math.cos(i)]}
-        i={i}
-      />
-    ))
-    .slice(0, 8);
-};
+const spheres = postTaxIncome.map(({ percentile, disposableIncome }) => ({
+  name: percentile,
+  size: disposableIncome,
+}));
 
 const Visualisation = () => {
   const camera = useRef();
@@ -81,18 +35,23 @@ const Visualisation = () => {
           ref: camera,
           position: cameraDefaultPosition,
           rotation: [0, 0, 0],
-          near: 1,
-          far: 1000,
+          near,
+          far,
         }}
       >
         <OrbitControls />
         <SetCamera position={cameraPosition} />
         <Skybox />
-        <pointLight position={[0, 0, 100]} intensity="0.9" />
-        <ambientLight intensity="0.02" />
-        <Spheres />
-        {false && <Box />}
-        <axesHelper args={[20]} />
+        <pointLight intensity="1" />
+        <ambientLight intensity="0.01" />
+        {show.Spheres && <Spheres spheres={spheres} />}
+        {show.Sphere && (
+          <Spheres.Sphere args={[near * 2, 35, 35]} position={[0, 0, 0]} />
+        )}
+        {show.BoxTest && (
+          <BoxTest args={[near * 1.5, near * 1.5, near * 1.5]} />
+        )}
+        <axesHelper args={[near * 1.4]} />
       </Canvas>
       <CameraControls
         cameraDefaultPosition={[cameraDefaultPosition]}
