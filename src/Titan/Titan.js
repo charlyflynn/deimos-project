@@ -2,6 +2,7 @@ import { Canvas, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
 import { CubeTextureLoader } from 'three';
 import OrbitControls from '../components/OrbitControls';
+import Saturn from './Saturn';
 
 const Skybox = () => {
   const { scene } = useThree();
@@ -23,16 +24,17 @@ const Visualisation = () => {
       <Canvas
         camera={{
           ref: camera,
-          position: [0, 0, 45],
+          position: [0, 20, 100],
           rotation: [0, 0, 0],
           near: 1,
           far: 1000,
         }}
       >
+        <Saturn position={[15, 25, -45]} />
         <OrbitControls />
         <Skybox />
-        <pointLight intensity="1" />
-        <ambientLight intensity="0.01" />
+        <pointLight intensity="1" position={[70, 40, -45]} />
+        <ambientLight intensity="0.05" />
         <axesHelper args={[10]} />
       </Canvas>
     </>
