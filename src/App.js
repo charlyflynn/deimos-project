@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Info from './components/Info';
 import RawDataTable from './components/RawDataTable';
 import Orbit from './Orbit/Orbit';
-import Titan from './Titan/Titan';
+import Titan from './Titan';
 
 const Container = styled.div`
   display: flex;
