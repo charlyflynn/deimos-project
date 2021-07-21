@@ -2,8 +2,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './Header';
 import Info from './Info';
+import Orbit from './Orbit';
 import RawDataTable from './RawDataTable';
-import Visualisation from './Visualisation';
+import Titan from './Titan';
 
 const Container = styled.div`
   display: flex;
@@ -33,8 +34,11 @@ function App() {
             <Route path="/data">
               <RawDataTable />
             </Route>
+            <Route path="/orbit">
+              <Orbit />
+            </Route>
             <Route path="/">
-              <Visualisation />
+              <Titan />
             </Route>
           </Switch>
         </ViewPort>
