@@ -21,7 +21,7 @@ const Sphere = ({ args, orbitRadius }) => {
       <sphereGeometry attach="geometry" args={args} />
       <meshLambertMaterial
         attach="material"
-        map={new TextureLoader().load('/images/mars.jpeg')}
+        map={new TextureLoader().load('/orbit/mars.jpeg')}
       />
     </mesh>
   );
