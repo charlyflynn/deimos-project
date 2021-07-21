@@ -19,7 +19,8 @@ const StyledHeader = styled.header`
 const Header = () => {
   return (
     <StyledHeader>
-      <Link to="">home</Link>
+      <Link to="">titan</Link>
+      <Link to="orbit">orbit</Link>
       <Link to="data">data</Link>
       <Link to="info">info</Link>
     </StyledHeader>
