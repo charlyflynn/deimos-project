@@ -1,3 +1,5 @@
+import './CameraControls.css';
+
 const CameraControls = ({ cameraDefaultPosition }) => {
   const [x, y, z] = cameraDefaultPosition;
   const controlDefs = [

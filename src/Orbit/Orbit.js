@@ -1,9 +1,9 @@
 import { Canvas } from '@react-three/fiber';
 import { useRef } from 'react';
-import BoxTest from './BoxTest';
-import CameraControls from './CameraControls';
-import OrbitControls from './OrbitControls';
-import postTaxIncome from './postTaxIncome';
+import BoxTest from '../components/BoxTest';
+import CameraControls from '../components/CameraControls';
+import OrbitControls from '../components/OrbitControls';
+import postTaxIncome from '../postTaxIncome';
 import Skybox from './Skybox';
 import Spheres from './Spheres';
 

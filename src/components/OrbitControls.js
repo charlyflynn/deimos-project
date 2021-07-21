@@ -1,7 +1,6 @@
 import { extend, useFrame, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import './CameraControls.css';
 
 extend({ OrbitControls });
 

@@ -1,7 +1,7 @@
 import { Canvas, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
 import { CubeTextureLoader } from 'three';
-import OrbitControls from './OrbitControls';
+import OrbitControls from '../components/OrbitControls';
 
 const Skybox = () => {
   const { scene } = useThree();

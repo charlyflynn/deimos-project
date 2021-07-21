@@ -1,4 +1,4 @@
-import postTaxIncome from './postTaxIncome.json';
+import postTaxIncome from '../postTaxIncome.json';
 
 function App() {
   const rows = postTaxIncome.map((item) => (

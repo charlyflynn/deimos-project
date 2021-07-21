@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
-import Header from './Header';
-import Info from './Info';
-import Orbit from './Orbit';
-import RawDataTable from './RawDataTable';
-import Titan from './Titan';
+import Header from './components/Header';
+import Info from './components/Info';
+import RawDataTable from './components/RawDataTable';
+import Orbit from './Orbit/Orbit';
+import Titan from './Titan/Titan';
 
 const Container = styled.div`
   display: flex;
