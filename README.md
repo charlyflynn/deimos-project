@@ -1,3 +1,6 @@
+A visualisation created both as a learning tool to learn three.js and react-three-fiber, and to ultimately produce a a visualisation of wealth inequality in the UK.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
