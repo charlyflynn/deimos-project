@@ -1,7 +1,11 @@
+# Deimos Project 
+
 A visualisation created both as a learning tool to learn three.js and react-three-fiber, and to ultimately produce a a visualisation of wealth inequality in the UK.
+
 
 [deployed version](https://deimos-project.netlify.app)
 
+---
 
 # Getting Started with Create React App
 
